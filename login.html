@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+<script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCFjUngBX8rXhjlBuwsmBoIyyI0veBWjOc",
+    authDomain: "sample-books-6251c.firebaseapp.com",
+    databaseURL: "https://sample-books-6251c.firebaseio.com",
+    projectId: "sample-books-6251c",
+    storageBucket: "sample-books-6251c.appspot.com",
+    messagingSenderId: "519531664071"
+  };
+  firebase.initializeApp(config);
+</script>
+<script src="auth_sample.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+	
+	#fun{
+		font-size: 32px;
+		color: white;
+		text-shadow: 2px 2px black;
+	}
+
+	.lit {
+color: white;
+		background-color: black;
+		border: 3px solid red;
+		width: 36%;
+    	padding: 8px 15px;
+    	margin: 8px 0;
+   		box-sizing: content-box;
+   		font-size: 30px;
+   		font-family: "Times New Roman";
+	}
+
+	#sign-in-user {
+		background-color: black;
+		border: 10px;
+		font-size: 16px;
+		padding: 8px 18px;
+		border: 3px solid red;
+		color: white;
+		font-family: "Times New Roman";
+
+	}
+
+#sign-in-user:hover {
+		background-color: red;		
+		border: 10px;
+		font-size: 16px;
+		padding: 8px 18px;
+		border: 3px solid black;		
+		color: white;
+		font-family: "Times New Roman";
+
+
+</style>
+</head>
+<body background="https://uploads-ssl.webflow.com/57dc5ba03bd579bc1ed6eab6/5b8536893f4d642704a25e43_vegan-plantbased-britishlibrary.jpg">
+	<div align="center">
+	<span id="fun">Enter username:</span>
+	<br>
+	<input type="text" id="enterUsername" class="lit">
+</div>
+
+<div align="center">
+<span id="fun">Password:</span>
+<br>
+<input type="password" id="enterPassword" class="lit">
+</div>
+
+<div align="center">
+<button id="sign-in-user">Log In</button>
+</div>
+
+<script>
+	$("#sign-in-user").click(function() {
+		let email = $("#enterUsername").val();
+		let password = $("#enterPassword").val();
+		signInHoe(email, password);
+
+
+		console.log("Signing in " + email + ":" + password + " to Firebase");
+	});
+</script>
+
+</body>
+</html>

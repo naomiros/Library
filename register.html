@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Books Project</title>
+	<script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCFjUngBX8rXhjlBuwsmBoIyyI0veBWjOc",
+    authDomain: "sample-books-6251c.firebaseapp.com",
+    databaseURL: "https://sample-books-6251c.firebaseio.com",
+    projectId: "sample-books-6251c",
+    storageBucket: "sample-books-6251c.appspot.com",
+    messagingSenderId: "519531664071"
+  };
+  firebase.initializeApp(config);
+</script>
+<script src="auth_sample.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<style>
+	
+	body {
+		background-color: white;
+	}
+
+	#random {
+		color: red;
+	}
+	#username-in {
+	color: white;
+		background-color: black;
+		border: 3px solid red;
+		width: 36%;
+    	padding: 8px 15px;
+    	margin: 8px 0;
+   		box-sizing: content-box;
+   		font-size: 30px;
+   		font-family: "Times New Roman";
+
+	
+	}	
+	#password-in {
+		color: white;
+		background-color: black;
+		border: 3px solid red;
+		width: 36%;
+    	padding: 8px 15px;
+    	margin: 8px 0;
+   		box-sizing: content-box;
+   		font-size: 30px;
+   		font-family: "Times New Roman";
+	}
+	#password-in-again {
+		color: white;
+		background-color: black;
+		border: 3px solid red;
+		width: 36%;
+    	padding: 8px 15px;
+    	margin: 8px 0;
+   		box-sizing: content-box;
+   		font-size: 30px;
+   		font-family: "Times New Roman";
+
+	}
+	#register-user {
+		background-color: black;
+		border: 10px;
+		font-size: 16px;
+		padding: 8px 18px;
+		border: 3px solid red;
+		color: white;
+		font-family: "Times New Roman";
+
+	}
+
+#register-user:hover {
+		background-color: red;		
+		border: 10px;
+		font-size: 16px;
+		padding: 8px 18px;
+		border: 3px solid black;		
+		color: white;
+		font-family: "Times New Roman";
+
+	}
+
+	#box {
+		border: 1px solid black;
+		position: relative;
+		width: 75%;
+		height: 50%;
+	}
+
+	#display-name {
+			color: white;
+		background-color: black;
+		border: 3px solid red;
+		width: 36%;
+    	padding: 8px 15px;
+    	margin: 8px 0;
+   		box-sizing: content-box;
+   		font-size: 30px;
+   		font-family: "Times New Roman";
+	}
+
+	#disp {
+		font-size: 32px;
+		text-shadow: 2px 2px black;
+		color: white;
+
+	}
+
+	#rand {
+		font-size: 32px;
+		color: white;
+		text-shadow: 2px 2px black;
+
+	}
+
+</style>
+
+</head>
+<body background="https://uploads-ssl.webflow.com/57dc5ba03bd579bc1ed6eab6/5b8536893f4d642704a25e43_vegan-plantbased-britishlibrary.jpg">
+
+<div align="center">
+	<span id=disp>Display Name (Optional): </span>
+	<br>
+	<input type="text" id="display-name">
+</div>
+
+<div align="center" id="rand">
+	<span id="rand">Email:</span>
+	<br>
+	<input type="text" id="username-in">
+</div>
+
+<div align="center" id=rand>
+<span id="rand">Password:</span>
+<br>
+<input type="password" id="password-in">
+</div>
+
+<div align="center" id=rand>
+<span id="rand">Password Again:</span>
+<br>
+<input type="password" id="password-in-again">
+</div>
+
+<div align="center">
+	<button id="register-user">Register</button>
+</div>
+
+
+
+<script>
+	$("#register-user").click(function() {
+
+		let dispName = $("#display-name").val();
+		let username = $("#username-in").val();
+		let password = $("#password-in").val();
+		let password2 = $("#password-in-again").val();
+
+		if (password === password2) {
+			console.log("Registering: " + username + ":" + password + " to Firebase");
+			registerUser(username, password, dispName);
+
+
+		} else {
+			alert("Passwords do not match: " + password + " and " + password2);
+		}
+
+
+	})
+
+	
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

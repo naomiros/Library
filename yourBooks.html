@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Your Book!</title>
+		<script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCFjUngBX8rXhjlBuwsmBoIyyI0veBWjOc",
+    authDomain: "sample-books-6251c.firebaseapp.com",
+    databaseURL: "https://sample-books-6251c.firebaseio.com",
+    projectId: "sample-books-6251c",
+    storageBucket: "sample-books-6251c.appspot.com",
+    messagingSenderId: "519531664071"
+  };
+  firebase.initializeApp(config);
+</script>
+<script src="auth_sample.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- //STYLING  -->
+
+<style>
+	.reg {
+
+		background-color: black;
+		color: white;
+		border: 1px solid red;
+		margin-top: 0px;
+		padding: 1%;
+		font-size: 40px;
+		text-align: center;
+		font-family: courier;
+		position: relative;
+		margin-top: 10px;
+
+	}
+.table {
+	color: white;
+		background-color: black;
+		border: 1px solid red;
+		width: 30%;
+    	padding: 2px 10px;
+    	margin: auto;
+   		box-sizing: content-box;
+   		font-size: 30px;
+   		font-family: courier;
+   		text-align: center;
+   		position: relative;
+   		margin-top: 10px;
+
+	}
+
+	#container {
+		font-size: 32px;
+		color: white;
+		text-shadow: 2px 2px black;
+		position: relative;
+		margin: auto;
+
+	}
+
+	
+
+
+
+	#clickme {
+		
+		background-color: black;
+		border: 10px;
+		font-size: 16px;
+		padding: 8px 18px;
+		border: 1px solid red;
+		color: white;
+		font-family: "Times New Roman";
+
+	}
+
+#clickme:hover {
+		background-color: red;		
+		border: 10px;
+		font-size: 16px;
+		padding: 8px 18px;
+		border: 1px solid black;		
+		color: white;
+		font-family: "Times New Roman";
+	}
+
+
+
+</style>
+
+</head>
+<body background="https://uploads-ssl.webflow.com/57dc5ba03bd579bc1ed6eab6/5b8536893f4d642704a25e43_vegan-plantbased-britishlibrary.jpg">
+	<body>
+
+		<button onclick="window.location.href= 'file:///Users/naomirosenblum/Desktop/ocr/snake/opener.html'" id="clickme">Sign Out</button>
+<div class="reg">Welcome to your library!</div>
+
+	
+
+
+</div>
+<table id="container">
+	<tr>
+		<td>Loading...</td>
+	</tr>	
+</table>
+<script>
+
+// set the observer
+    firebase.auth().onAuthStateChanged((user) => {
+  	if (user) {
+	let id=firebase.auth().currentUser.uid;
+	 firebase.database().ref("/users/" + user.uid +"/checkedout").on("value", function(snapshot) {
+        $("#container").html(""); // clear all the inner tags of the list
+		snapshot.forEach(function (childSnap) {
+		
+		let dbRef = firebase.database().ref("/Books/"+childSnap.key);
+				dbRef.once('value').then(function(snapshot){
+					var o = snapshot.val();
+					$("#container").append("<tr><td><a href='checkOutBook.html?id=" + dbRef.key + "'>" + o.title1 + "</tr></td>"+"</a>");
+				});
+		
+	});
+  });
+}
+ });
+  
+	/*
+	let student = firebase.database().ref("/Books");
+	student.on("value", function(snapshot){
+		let data = snapshot.val();	
+		let keys= Object.keys(data);
+		let container= $("#container");
+		container.html("");
+		for(let i=0; i< keys.length;i++){
+			let runningkey = keys[i];
+			let title= data[runningkey];
+			let table = $("#container");
+			table.append(
+				"<tr><td>" + snapshot.child(runningkey + "/title").val() + "</td><td>"); 
+		
+		}
+		
+	});*/
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>mainPage</title>
+<style>
+	#clickme {
+		
+		background-color: black;
+		border: 10px;
+		font-size: 16px;
+		padding: 8px 18px;
+		border: 3px solid red;
+		color: white;
+		font-family: "Times New Roman";
+
+	}
+
+#clickme:hover {
+		background-color: red;		
+		border: 10px;
+		font-size: 16px;
+		padding: 8px 18px;
+		border: 3px solid black;		
+		color: white;
+		font-family: "Times New Roman";
+	}
+
+
+	h1 {
+		background-color: black;
+		color: white;
+		border: 1px solid red;
+		position: relative;
+		margin-top: 100px;
+		padding: 2%;
+}
+
+
+	#createBook {
+		color: red;
+		background-color: black;
+		border: 2px solid white;
+		font-size: 32px;
+		padding: 15px 32px;
+		font-family: "Times New Roman";
+
+	}
+
+	#viewBooks {
+		color: red;
+		background-color: black;
+		border: 2px solid white;
+		font-size: 32px;
+		padding: 15px 32px;
+		font-family: "Times New Roman";
+
+	}
+
+
+
+</style>
+</head>
+<body background="https://uploads-ssl.webflow.com/57dc5ba03bd579bc1ed6eab6/5b8536893f4d642704a25e43_vegan-plantbased-britishlibrary.jpg">
+	<button onclick="window.location.href= 'file:///Users/naomirosenblum/Desktop/ocr/snake/opener.html'" id="clickme">Sign Out</button>
+<script>
+let signOut = function() {
+	firebase.auth().signOut().then(function() {
+  // Sign-out successful.
+	}).catch(function(error) {
+  // An error happened.
+	});
+}
+</script>
+<div>
+	<button onclick="window.location.href='file:///Users/naomirosenblum/Desktop/ocr/snake/create-book.html'" id=createBook>Create Book</button>
+	<button onclick="window.location.href='file:///Users/naomirosenblum/Desktop/ocr/snake/yourBooks.html'" id=viewBooks>View Books in Your Library</button>
+</div>
+<!-- <script>
+				$("#viewBooks").click(function() {
+			window.location.href='yourBooks.html'
+
+		});
+</script> -->
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

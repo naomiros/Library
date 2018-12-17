@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Create Book!</title>
+		<script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCFjUngBX8rXhjlBuwsmBoIyyI0veBWjOc",
+    authDomain: "sample-books-6251c.firebaseapp.com",
+    databaseURL: "https://sample-books-6251c.firebaseio.com",
+    projectId: "sample-books-6251c",
+    storageBucket: "sample-books-6251c.appspot.com",
+    messagingSenderId: "519531664071"
+  };
+  firebase.initializeApp(config);
+</script>
+<script src="auth_sample.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<style>
+	
+	h1 {
+		background-color: black;
+		color: white;
+		border: 1px solid red;
+		position: relative;
+		margin-top: 100px;
+		padding: 2%;
+}
+
+
+.more {
+	color: white;
+		background-color: black;
+		border: 3px solid red;
+		width: 36%;
+    	padding: 8px 15px;
+    	margin: 8px 0;
+   		box-sizing: content-box;
+   		font-size: 30px;
+   		font-family: "Times New Roman";
+
+
+	}
+
+		#boxes {
+		font-size: 32px;
+		color: white;
+		text-shadow: 2px 2px black;
+
+	}
+
+	#save, #view {
+		background-color: black;
+		border: 10px;
+		font-size: 16px;
+		padding: 8px 18px;
+		border: 3px solid red;
+		color: white;
+		font-family: "Times New Roman";
+
+	}
+
+#save:hover, #view:hover {
+		background-color: red;		
+		border: 10px;
+		font-size: 16px;
+		padding: 8px 18px;
+		border: 3px solid black;		
+		color: white;
+		font-family: "Times New Roman";
+
+
+
+
+	</style>
+</head>
+<body background="https://uploads-ssl.webflow.com/57dc5ba03bd579bc1ed6eab6/5b8536893f4d642704a25e43_vegan-plantbased-britishlibrary.jpg">
+
+
+	<div align="center" id="boxes">
+	<span id="rand">Add Title:</span>
+	<br>
+	<input type="text" id="title1" class="more">
+</div>
+	<div align="center" id="boxes">
+	<span id="rand">Add Author: </span>
+	<br>
+	<input type="text" id="author" class="more">
+</div>
+
+
+
+<div align="center" id="boxes">
+<span id="rand">Year Published:</span>
+<br>
+<input type="text" id="year" class="more">
+</div>
+
+
+
+<div align="center">
+	<button id=save>SAVE</button>
+</div>
+
+<div align="center">
+	<button id=view>VIEW LIBRARY!</button>
+</div>
+
+
+
+<script>
+
+		$("#view").click(function() {
+			window.location.href='file:///Users/naomirosenblum/Desktop/ocr/snake/view-books.html'
+
+		});
+
+		
+
+	let addBookToDatabase = function(title1, author, year) {
+    let db = firebase.database().ref("/Books"); 
+    let obj={
+    	title1: title1,
+    	author: author,
+    	year: year
+    };
+    db.push(obj);
+
+};
+
+$("#save").click(function() {
+	
+		//observer, on function 
+		// window.location.href='file:///Users/naomirosenblum/Desktop/ocr/snake/view-books.html'
+		let title1 = $("#title1").val();
+		let author = $("#author").val();
+		let year = $("#year").val();
+		addBookToDatabase(title1, author, year);
+		alert("book added");
+	});
+
+
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Check Out Book!</title>
+
+	<script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCFjUngBX8rXhjlBuwsmBoIyyI0veBWjOc",
+    authDomain: "sample-books-6251c.firebaseapp.com",
+    databaseURL: "https://sample-books-6251c.firebaseio.com",
+    projectId: "sample-books-6251c",
+    storageBucket: "sample-books-6251c.appspot.com",
+    messagingSenderId: "519531664071"
+  };
+  firebase.initializeApp(config);
+</script>
+<script src="auth_sample.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+	<style>
+		#rand {
+			font-size: 40px;
+			text-align: center;
+			font-family: courier;
+
+		}
+
+
+
+
+#clickme, #save, #returnbook {
+		
+		background-color: black;
+		border: 10px;
+		font-size: 16px;
+		padding: 8px 18px;
+		border: 1px solid red;
+		color: white;
+		font-family: "Times New Roman";
+
+	}
+
+#clickme:hover, #save:hover, #returnbook:hover {
+		background-color: red;		
+		border: 10px;
+		font-size: 16px;
+		padding: 8px 18px;
+		border: 1px solid black;		
+		color: white;
+		font-family: "Times New Roman";
+	}
+
+	.dope {
+		font-size: 32px; 
+	}
+
+
+
+
+
+	</style>
+
+
+
+</head>
+<body background="https://uploads-ssl.webflow.com/57dc5ba03bd579bc1ed6eab6/5b8536893f4d642704a25e43_vegan-plantbased-britishlibrary.jpg">	
+
+
+<button onclick="window.location.href= 'file:///Users/naomirosenblum/Desktop/ocr/snake/opener.html'" id="clickme">Sign Out</button>
+
+
+<div>
+	<span id="rand">Title:</span>
+	<span id="tit" class="dope"></span>
+</div>
+<div>
+	<span id="rand">Author:</span>
+	<span id="auth" class="dope"></span>
+</div>
+<div>
+	<span id="rand">Year Published:</span>
+	<span id="yr" class="dope"></span>
+</div>
+<div>
+	<span id="rand">Summary:</span>
+	<span id="sum" class="dope"></span>
+</div>
+
+<br>
+<button id="save" class="just">Check Out!</button>
+
+<button id="returnbook" class="just">Return Book!</button>
+
+<script>
+ let extractGetParameter = function(key) {
+        let a = new URLSearchParams(window.location.search);
+        return a.get(key);
+    };
+	
+firebase.database() 
+        .ref("/Books/" + extractGetParameter("id"))
+        .on("value", function(snapshot) {
+            let data = snapshot.val(); // extract data from snapshot
+			$("#tit").text(data.title1);
+			$("#auth").text(data.author);
+			$("#yr").text(data.year);
+			$("#sum").text(data.summary);
+		if(data.TakenOutBy!==undefined){
+			$("#save").click(function(){
+				alert("already checked out");
+				window.location.href='view-books.html';
+			});
+		}else{
+			$("#save").click(function(){
+				let title1 = $("#tit").text();
+				addcheckout(title1);
+				onebook();
+				alert("you have been checked out");
+				window.location.href='view-books.html';
+			});
+		}
+			
+    });
+
+    firebase.database() 
+        .ref("/Books/" + extractGetParameter("id"))
+        .on("value", function(snapshot) {
+            let data = snapshot.val(); // extract data from snapshot
+			$("#tit").text(data.title1);
+			$("#auth").text(data.author);
+			$("#yr").text(data.year);
+			$("#sum").text(data.summary);
+		if(data.TakenOutBy!==undefined){
+			$("#returnbook").click(function(){
+				alert("your book has been returned ");
+				window.location.href='view-books.html';
+			});
+		}else{
+			$("#returnbook").click(function(){
+				let title1 = $("#tit").text();
+				addcheckout(title1);
+				onebook();
+				alert("this book ain't checked out amiga");
+			});
+		}
+			
+    });
+
+
+		
+let addcheckout = function(title1){
+	let id = firebase.auth().currentUser.uid;
+	let db = firebase.database();
+	let dbRef = db.ref("/users/" + id +"/checkedout/" + extractGetParameter("id") );
+	dbRef.set(
+	{
+		title1:title1
+	});
+}
+
+let onebook = function(){
+	let id = firebase.auth().currentUser.uid;
+	let db = firebase.database();
+	let dbRef = db.ref("/Books/" + extractGetParameter("id") +"/TakenOutBy");
+	dbRef.set(
+	{
+		User:id
+	});
+}
+
+let returnbook = function(){
+	let id = firebase.auth().currentUser.uid;
+	let db = firebase.database();
+	let dbRef = db.ref("/users/" + id +"/checkedout/" + extractGetParameter("id") );
+	dbRef.set(
+	{
+		title1:null
+	});
+}
+
+let returnother = function(){
+	let id = firebase.auth().currentUser.uid;
+	let db = firebase.database();
+	let dbRef = db.ref("/Books/" + extractGetParameter("id") +"/TakenOutBy");
+	dbRef.set(
+	{
+		User:null
+	});
+}
+
+</script>
+
+</body>
+</html>
